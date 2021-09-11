@@ -8,6 +8,7 @@ const searchInput = document.querySelector('.search-input');
 const form = document.querySelector('.search-form');
 const wrapper = document.querySelector('.wrapper');
 const desc = document.querySelector('.desc');
+const main = document.querySelector('.main');
 let searchValue;
 let active = false;
 
@@ -35,11 +36,13 @@ async function getWeather(location){
 async function create(location){
 	let date = await getWeather(location);
 	if(date){
-	  zone.textContent = date.name;
+		console.log(date);
+	  zone.textContent = `${date.name}, ${date.sys.country}`;
 	  icon.innerHTML = `<img src='http://openweathermap.org/img/wn/${date.weather[0].icon}@2x.png' />`;
 		desc.textContent = date.weather[0].main;
-    temp.textContent = `temperature: ${date.main.temp}°C`;
-    windSpeed.textContent = `wind speed ${date.wind.speed} m/s`;
+		main.textContent = `${date.main.temp}°C`;
+    temp.textContent = `${date.main.temp_min}/${date.main.temp_max}°C`;
+    windSpeed.textContent = `wind: ${date.wind.speed} m/s`;
 	  if(!active) {
 		  wrapper.classList.add('active');
   		active = true;
