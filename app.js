@@ -9,8 +9,10 @@ const form = document.querySelector('.search-form');
 const wrapper = document.querySelector('.wrapper');
 const desc = document.querySelector('.desc');
 const main = document.querySelector('.main');
+const day = document.querySelector('.date');
 let searchValue;
 let active = false;
+let today = new Date();
 
 searchInput.addEventListener('input',updateInput);
 
@@ -40,6 +42,7 @@ async function create(location){
 	  zone.textContent = `${date.name}, ${date.sys.country}`;
 	  icon.innerHTML = `<img src='http://openweathermap.org/img/wn/${date.weather[0].icon}@2x.png' />`;
 		desc.textContent = date.weather[0].main;
+		day.textContent = `${today.getDay()} ${today.toLocaleString('en', { month: 'long' })} ${today.getFullYear()}`;
 		main.textContent = `${date.main.temp}°C`;
     temp.textContent = `${date.main.temp_min}/${date.main.temp_max}°C`;
     windSpeed.textContent = `wind: ${date.wind.speed} m/s`;
